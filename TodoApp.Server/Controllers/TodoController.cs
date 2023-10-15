@@ -60,9 +60,13 @@ namespace TodoApp.Server.Controllers
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
 
-            result.CompletedDate = DateTime.UtcNow;
+            if (result.CompletedDate.HasValue)
+                result.CompletedDate = null;
+            else
+                result.CompletedDate = DateTime.UtcNow;
+
             await _todoContext.SaveChangesAsync();
-            return Ok();
+            return Ok(result.CompletedDate);
         }
 
         // DELETE api/<TodoController>/5
