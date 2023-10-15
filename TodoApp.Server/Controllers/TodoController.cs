@@ -24,7 +24,7 @@ namespace TodoApp.Server.Controllers
         {
             var result = _todoContext.Todos
                 .AsNoTracking()
-                .Where(x => x.CompletedDate == null)
+                //.Where(x => x.CompletedDate == null)
                 .ToList();
             return Ok(result);
         }
