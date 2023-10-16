@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ToDoList from './pages/ToDoList.jsx';
+import CreateTodo from './pages/CreateTodo.jsx';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -9,35 +11,21 @@ export default class App extends Component {
         this.state = { toDos: [], loading: true };
     }
 
-    componentDidMount() {
-        this.populateTodoItems();
-    }
-
-    static renderTodoPage(todoItems) {
-        return (<ToDoList todoItems={todoItems} />)
-    }
-
     render() {
-        let contents = this.state.loading
-            ? <p>Loading...</p>
-            : App.renderTodoPage(this.state.toDos);
-
         return (
             <div>
-                <h1 id="tabelLabel" >Rikke's To Do</h1>
-                {contents}
+                <h1 id="tabelLabel" >Jon's To Do</h1>
+                <BrowserRouter>
+                    <Routes>
+                        <Route index element={<ToDoList />} />
+                        <Route path="create" element={<CreateTodo />} />
+                    </Routes>
+                </BrowserRouter>
             </div>
         );
     }
 
-    async populateTodoItems() {
-        // todo fetch todo items, set state
-        //this.setState({ toDos: [{ text: "Item1", completedDate: null }, { text: "Item2", completedDate: "2023-10-14 13:23:11Z" }], loading: false });
 
-        const response = await fetch('api/todo');
-        const data = await response.json();
-        this.setState({ toDos: data, loading: false })
-    }
 
 
     //async populateWeatherData() {
