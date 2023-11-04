@@ -20,12 +20,12 @@ export class CreateTodoComponent {
     private todoService: TodoService,
     private formBuilder: FormBuilder,
   ) {
-    this.todo.text = "Hej!";
+    this.todo.text = "";
     console.log(this.todo.text);
 
   };
 
-  handleSave() {
-    console.log(this.todo.text);
+  async handleSave() {
+    await this.todoService.createTodo(this.todo);
   }
 }
