@@ -1,0 +1,11 @@
+<div>
+  <input type="checkbox" [checked]="todo.completedDate !== null" (change)="onCheckboxChange(todo)" />
+  <div>{{todo.text}}</div>
+  <div *ngIf="todo.completedDate">
+    <span>
+      {{todo.completedDate | date: 'short'}}
+    </span>
+    }
+  </div>
+  <input type="button" className="btn-sm btn-danger" (click)="onDeleteButtonClicked(todo.id)" value="Delete" />
+</div>

@@ -1,0 +1,13 @@
+<div>
+  <p *ngIf="!todos"><em>Loading... Please refresh once the ASP.NET backend has started. </em></p>
+
+  <div *ngIf="todos">
+    <div>
+      <button type="button" [routerLink]="'/create'">
+        Create new
+      </button>
+    </div>
+      <app-todo-item-table [heading]="pendingTodosHeading" [todos]="pendingTodos" (onTodoChanged)="handleTodoChanged($event)" (onTodoDeleted)="handleTodoDeleted($event)"/>
+      <app-todo-item-table [heading]="completedTodosHeading" [todos]="completedTodos" (onTodoChanged)="handleTodoChanged($event)" (onTodoDeleted)="handleTodoDeleted($event)"/>
+  </div>
+</div>

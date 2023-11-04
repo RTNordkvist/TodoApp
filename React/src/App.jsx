@@ -14,7 +14,7 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <h1 id="tabelLabel" >Jon's To Do</h1>
+                <h1 id="tabelLabel" >What to do?</h1>
                 <BrowserRouter>
                     <Routes>
                         <Route index element={<ToDoList />} />
