@@ -2,12 +2,12 @@
   <div>
     <h2>Create new task</h2>
   </div>
-  <div className="createGrid">
+  <div class="createGrid">
     <label>
       Description:
     </label>
     <input type="text" [(ngModel)]="todo.text" />
-    <button (click)="handleSave()" [routerLink]="'/'">
+    <button (click)="handleSave()">
       Submit
     </button>
     <button [routerLink]="'/'">

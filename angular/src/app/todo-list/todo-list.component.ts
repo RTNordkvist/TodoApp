@@ -9,13 +9,12 @@ import { TodoService } from '../todo.service';
 })
 export class TodoListComponent {
 
-  constructor(
-    private todoService: TodoService,
-    private changeDetectorRef: ChangeDetectorRef,
-  ) {
+  constructor(private todoService: TodoService) {  }
+
+  ngOnInit() {
+
     this.todoService.getAllTodos()
-      .then(data =>
-      {
+      .then(data => {
         this.todos = data;
         this.pendingTodos = data.filter((todo => !todo.completedDate));
         this.completedTodos = data.filter((todo => todo.completedDate));
@@ -45,15 +44,13 @@ export class TodoListComponent {
     this.completedTodos = this.todos.filter((todo => todo.completedDate));
   }
 
-  async handleTodoDeleted(todoId: number) {
+  handleTodoDeleted(todoId: number) {
 
-    await this.todoService.deleteTodo(todoId);
+    this.todoService.deleteTodo(todoId).then(x => {
+      this.todos = this.todos.filter(todoItem => todoItem.id !== todoId);
 
-    this.todos.filter(todoItem => todoItem.id !== todoId)
-
-    this.pendingTodos = this.todos.filter((todo => !todo.completedDate));
-    this.completedTodos = this.todos.filter((todo => todo.completedDate));
-
-    this.changeDetectorRef.detectChanges();
+      this.pendingTodos = this.todos.filter((todo => !todo.completedDate));
+      this.completedTodos = this.todos.filter((todo => todo.completedDate));
+    });
   }
 }
